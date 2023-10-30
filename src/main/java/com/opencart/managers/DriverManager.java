@@ -22,10 +22,9 @@ public class DriverManager {
                 options.addArguments("--start-maximized");
                 driver = new ChromeDriver(options);
                 System.out.println("The Chrome driver is initiated");
+                options.addArguments("--incognito");
                 break;
-//                driver = new ChromeDriver();
-//                System.out.println("The Chrome Driver is initiated");
-//                break;
+
 
             case "FIREFOX":
                 driver = new FirefoxDriver();
