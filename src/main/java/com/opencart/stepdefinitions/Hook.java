@@ -21,12 +21,14 @@ public class Hook {
 
     @After
     public void afterEachTest(){
-        DriverManager.getInstance().tearDown();
+       // DriverManager.getInstance().deleteCookies();
         System.out.println("A test execution just finished");
     }
 
     @AfterAll
-    public static void afterAll(){
+    public static void afterAll() throws InterruptedException {
+        Thread.sleep(1000);
+        DriverManager.getInstance().tearDown();
         System.out.println("The test execution has been finished");
     }
 }

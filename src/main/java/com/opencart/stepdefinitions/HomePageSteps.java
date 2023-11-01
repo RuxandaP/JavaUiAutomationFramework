@@ -15,8 +15,6 @@ public class HomePageSteps {
     public void homepageIsDisplayed() {
         driver.get("https://www.andreisecuqa.host/");
         System.out.println("The driver accessed the Home Page");
-
-
     }
 
     @When("registerLink from Header menu is clicked")

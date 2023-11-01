@@ -4,7 +4,10 @@ import com.opencart.managers.DriverManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.List;
 
 public class GenericSteps {
     WebDriver driver = DriverManager.getInstance().getDriver();
@@ -16,9 +19,18 @@ public class GenericSteps {
         boolean currentUrlContainsKeyword = currentUrl.contains(keyWordFromTheUrl);
         Assertions.assertTrue(currentUrlContainsKeyword, "The keyword: " + keyWordFromTheUrl + " is present in " + currentUrl);
     }
-
     @Given("{string} end point is accessed")
     public void endPointIsAccessed(String endpointValue) {
-        driver.get("http://andreisecuqa.host" + endpointValue);
+        driver.get("https://andreisecuqa.host" + endpointValue);
+    }
+
+    @Then("The following list of error messages is displayed:")
+    public void theFollowingListOfErrorMessagesIsDisplayed(List<String> errorMessagesList) throws InterruptedException {
+        Thread.sleep(1000);
+
+        errorMessagesList.forEach(errorMessage -> {
+            boolean errorMessageIsDisplayed = driver.findElement(By.xpath("//*[contains(text(),'"+ errorMessage+"')]")).isDisplayed();
+            Assertions.assertTrue(errorMessageIsDisplayed,"The error message:" + errorMessage+"is displayed");
+        });
     }
 }
