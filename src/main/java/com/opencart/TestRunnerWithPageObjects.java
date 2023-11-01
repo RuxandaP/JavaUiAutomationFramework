@@ -3,6 +3,7 @@ package com.opencart;
 import com.opencart.managers.DriverManager;
 import com.opencart.managers.RandomDataManager;
 import com.opencart.pageobjects.HomePage;
+import com.opencart.pageobjects.LoginPage;
 import com.opencart.pageobjects.RegisterPage;
 import org.openqa.selenium.*;
 
@@ -30,6 +31,12 @@ public class TestRunnerWithPageObjects {
 
         registerPage.fillInTheRegisterForm(firstName, lastName, randomEmail, password,true);
         registerPage.clickTheContinueBtn();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.fillInTheLoginForm(randomEmail, password);
+        loginPage.clickLoginBtt();
+
+
 
         DriverManager.getInstance().tearDown();
 
